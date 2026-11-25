@@ -1,0 +1,77 @@
+    html, body { margin: 0; height: 100%; overflow: hidden; font-family: 'Poppins', system-ui, -apple-system, Segoe UI, sans-serif;
+    background: linear-gradient(180deg, #58aaf0 0%, #d6eafa 55%, #d6eafa 100%); }
+    canvas { display: block; touch-action: none; }
+
+  #panel {
+    position: fixed; top: 14px; left: 14px; width: 272px;
+    background: rgba(255, 255, 255);
+    backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, .45);
+    box-shadow: 0 10px 30px rgba(20, 30, 60, .25);
+    color: #fff; padding: 14px 14px 12px; border-radius: 18px; font-size: 12.5px; line-height: 1.5;
+    user-select: none; text-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+  }
+  #panel.noche { background: rgba(10, 16, 40, .45); border-color: rgba(150, 170, 255, .3); }
+  #panel h1 { font-size: 16px; margin: 0; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  #panel h1 span.logo {
+    display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 10px;
+    background: linear-gradient(135deg, #ff8a5c, #ffc857); text-shadow: none; font-size: 16px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+  }
+  #panel .sub { opacity: .85; font-size: 11px; margin: 2px 0 10px 38px; }
+  #panel .ayuda { display: grid; gap: 2px; opacity: .95; margin-bottom: 10px; }
+  #panel .ayuda b { color: #ffe08a; }
+  #panel .fila { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  #panel button {
+    font-family: inherit; color: #fff; border: 1px solid rgba(255, 255, 255, .35); border-radius: 10px;
+    padding: 7px 8px; font-size: 11.5px; font-weight: 600; cursor: pointer;
+    background: rgba(255, 255, 255, .16); transition: transform .12s, background .2s;
+    text-shadow: none;
+  }
+  #panel button:hover { background: rgba(255, 255, 255, .32); transform: translateY(-1px); }
+  #panel button.activo { background: linear-gradient(135deg, #ff8a5c, #ffb347); border-color: transparent; }
+  #panel button.ancho { grid-column: span 2; }
+
+  #aviso {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+    background: rgba(20, 30, 50, .88); color: #fff; padding: 9px 16px;
+    border-radius: 12px; font-size: 13px; display: none; box-shadow: 0 6px 20px rgba(0,0,0,.3);
+  }
+  #pie {
+    position: fixed; right: 14px; bottom: 12px; color: rgba(255,255,255,.9); font-size: 11px;
+    text-shadow: 0 1px 4px rgba(0,0,0,.5); letter-spacing: .4px; pointer-events: none;
+  }
+  #edificios {
+    position: fixed; top: 14px; right: 14px; width: 210px;
+    background: rgba(255, 255, 255, .22);
+    backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, .45);
+    box-shadow: 0 10px 30px rgba(20, 30, 60, .25);
+    color: #fff; padding: 12px; border-radius: 18px; font-size: 12.5px;
+    user-select: none; text-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+  }
+  #edificios.noche { background: rgba(10, 16, 40, .45); border-color: rgba(150, 170, 255, .3); }
+  #edificios h2 { font-size: 14px; margin: 0 0 8px; font-weight: 700; }
+  #edificios button {
+    display: flex; align-items: center; gap: 8px; width: 100%; margin-bottom: 6px; text-align: left;
+    font-family: inherit; color: #fff; border: 1px solid rgba(255, 255, 255, .35); border-radius: 10px;
+    padding: 8px 10px; font-size: 12px; font-weight: 600; cursor: pointer;
+    background: rgba(255, 255, 255, .16); transition: transform .12s, background .2s; text-shadow: none;
+  }
+  #edificios button:last-child { margin-bottom: 0; }
+  #edificios button:hover { background: rgba(255, 255, 255, .32); transform: translateY(-1px); }
+  #edificios button.activo { background: linear-gradient(135deg, #ff8a5c, #ffb347); border-color: transparent; }
+  #edificios .punto { width: 12px; height: 12px; border-radius: 50%; flex: none; box-shadow: 0 0 0 2px rgba(255, 255, 255, .7); }
+  #edificios .tecla { margin-left: auto; opacity: .75; font-size: 10.5px; }
+  #mira {
+    position: fixed; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px;
+    border-radius: 50%; border: 2px solid rgba(255, 255, 255, .9); box-shadow: 0 0 6px rgba(0, 0, 0, .45);
+    display: none; pointer-events: none;
+  }
+  #guiaCaminar {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); max-width: 92vw; text-align: center;
+    background: rgba(20, 30, 50, .82); color: #fff; padding: 9px 16px; border-radius: 12px; font-size: 12.5px;
+    display: none; pointer-events: none; box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+  }
+  #guiaCaminar b { color: #ffe08a; }
+  @media (max-width: 560px) { #panel { width: 210px; font-size: 11px; } #edificios { width: 150px; font-size: 11px; } #pie { display: none; } }
